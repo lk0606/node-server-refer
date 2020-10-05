@@ -1,13 +1,13 @@
+import Sequelize from 'sequelize'
+import dbConfig from '../config/sequelize'
 
-
-const Sequelize = require('sequelize')
 const { db: {
     dbName,
     host,
     port,
     user,
     password,
-}} = require('../config/index')
+}} = dbConfig
 
 const sequelize = new Sequelize(dbName, user, password, {
     dialect: 'mysql', // mysql2
@@ -28,4 +28,4 @@ sequelize.sync({
     alter: true
 })
 
-module.exports = sequelize
+export default sequelize

@@ -1,21 +1,27 @@
-const Router = require('koa-router')
-const router = new Router()
+import Router from 'koa-router'
 
-router.get('/v1/book/latest', async (ctx, next) => {
-    ctx.body = {
-        key: 'book1'
-    }
+const router = new Router({
+    prefix: '/v1/book'
 })
-router.post('/v1/book/:id/like', async (ctx, next) => {
+
+router.get('/latest', async (ctx, next) => {
+    // await next()
+    ctx.body = {
+        key: 'book1',
+        status: ctx.status
+    }
+    await next()
+})
+
+router.post('/:id/like', async (ctx, next) => {
     const params = ctx.params // :
     const query = ctx.request.query // ?
     const header = ctx.request.header
     const body = ctx.request.body // koa-bodyparser
     console.log(ctx.status, params, query, body,'path');
     ctx.body = {
-        key: 'book2'
+        key: `book1, id=${params.id}`
     }
-    throw new Error('api error')
 })
 
 module.exports = router

@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "nodemon",
-            "runtimeExecutable": "${workspaceFolder}/.bin/nodemon",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/nodemon",
             "runtimeArgs":["--exec", "babel-node"],
             "program": "${workspaceFolder}/app.js",
             "restart": true,

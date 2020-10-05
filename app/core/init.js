@@ -1,7 +1,5 @@
-
-
-const KoaRouter = require('koa-router')
-const requireDirectory = require('require-directory')
+import KoaRouter from 'koa-router'
+import requireDirectory from 'require-directory'
 
 class InitManger {
     static initCore(app) {
@@ -13,6 +11,7 @@ class InitManger {
         const routes = requireDirectory(module, rootDir, {
             visit: isKoaRouter
         })
+        console.log('routes :>> ', routes);
         function isKoaRouter(obj) {
             if(obj instanceof KoaRouter) {
                 InitManger.app.use(obj.routes())
@@ -22,4 +21,4 @@ class InitManger {
 }
 
 
-module.exports = InitManger
+export default InitManger

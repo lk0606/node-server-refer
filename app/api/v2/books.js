@@ -1,4 +1,4 @@
-const Router = require('koa-router')
+import Router from 'koa-router'
 const router = new Router()
 
 router.get('/v2/book/latest', async (ctx, next) => {

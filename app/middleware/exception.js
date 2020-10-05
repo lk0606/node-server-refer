@@ -16,4 +16,5 @@ const catchError = async (ctx, next)=> {
         // error_code message request_url
     }
 }
-module.exports = catchError
+
+export default catchError

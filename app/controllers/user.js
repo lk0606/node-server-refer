@@ -1,7 +1,6 @@
-
-const jsonwebtoken = require('jsonwebtoken')
-const bcrypt = require('bcryptjs')
-const User = require('../models/user')
+import jsonwebtoken from 'jsonwebtoken'
+import bcrypt from 'bcryptjs'
+import User from '../models/user'
 
 class UserController {
     static async register(ctx, next) {
