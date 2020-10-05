@@ -11,21 +11,27 @@ User.init({
         primaryKey: true,
         autoIncrement: true,
     },
-    nickName: DataTypes.STRING,
-    email: {
-        type: DataTypes.STRING(128),
-        unique: true,
-    },
-    password: DataTypes.STRING
+    username: DataTypes.STRING,
+    // email: {
+    //     type: DataTypes.STRING(128),
+    //     unique: true,
+    // },
+    password: DataTypes.STRING,
+    // createdTime: {
+    //     type: DataTypes.DATE,
+    //     field: "created_time"
+    // },
+    // updatedTime: {
+    //     type: DataTypes.DATE,
+    //     field: "updated_time"
+    // },
+    // deletedTime: {
+    //     type: DataTypes.DATE,
+    //     field: "deleted_time"
+    // },
 }, {
     sequelize,
-    underscored: true, // 驼峰转_
     tableName: 'user',
-    createdAt: 'create_time',
-    updatedAt: 'updated_time',
-    deletedAt: 'deleted_time',
 })
 
-module.exports = {
-    User
-}
+module.exports = User

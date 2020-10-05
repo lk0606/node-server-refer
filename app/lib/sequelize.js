@@ -7,7 +7,7 @@ const { db: {
     port,
     user,
     password,
-}} = require('../../config/index')
+}} = require('../config/index')
 
 const sequelize = new Sequelize(dbName, user, password, {
     dialect: 'mysql', // mysql2
@@ -16,7 +16,11 @@ const sequelize = new Sequelize(dbName, user, password, {
     logging: true,
     timezone: '+08:00',
     define: {
-        paranoid: true
+        paranoid: true,
+        underscored: true, // 驼峰转_
+        createdAt: 'created_time',
+        updatedAt: 'updated_time',
+        deletedAt: 'deleted_time',
     },
 })
 
