@@ -1,9 +1,11 @@
-import { get } from '@wont/utils'
+import jsonwebtoken from 'jsonwebtoken'
+import bcrypt from 'bcryptjs'
 import User from '../models/user'
+import { get } from '@wont/utils'
 
 class UserService {
     /**
-     * @param {object} data 
+     * @param {object} data
      * @property {string} data.username
      * @property {string} data.password
      * @property {boolean} data.remember
@@ -17,39 +19,37 @@ class UserService {
         }
     }
 
-    static async findUser(username) {
+    static async getUserInfo(data) {
+        const { username } = data
         try {
             const user = await User.findOne({
                 where: {
                     username
                 }
             })
-            return user
+            return user.dataValues
         } catch (error) {
         }
     }
 
     static async register(data) {
         const { username } = data
-        const user = await UserService.findUser(username)
-        const hasUsername = get(user, 'dataValues.username')
-        if(hasUsername) {
+        const user = await UserService.getUserInfo(username)
+        if(user) {
             const result = {
                 success: false,
-                username: hasUsername,
                 message: `用户名${hasUsername}已存在`,
             }
             return result
         }
-        
+
         const newUser = await UserService.create(data)
         return newUser
-        
     }
 }
 
 export default {
     create: UserService.create,
-    findUser: UserService.findUser,
+    getUserInfo: UserService.getUserInfo,
     register: UserService.register,
 }
