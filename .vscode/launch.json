@@ -30,6 +30,16 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "babel-node 当前文件",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node",
+            "program": "${file}"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "启动程序",
             "skipFiles": [
                 "<node_internals>/**"

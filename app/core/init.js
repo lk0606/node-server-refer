@@ -11,7 +11,6 @@ class InitManger {
         const routes = requireDirectory(module, rootDir, {
             visit: isKoaRouter
         })
-        console.log('routes :>> ', routes);
         function isKoaRouter(obj) {
             if(obj instanceof KoaRouter) {
                 InitManger.app.use(obj.routes())

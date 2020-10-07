@@ -13,7 +13,7 @@ const sequelize = new Sequelize(dbName, user, password, {
     dialect: 'mysql', // mysql2
     host,
     port,
-    logging: true,
+    logging: false, // console.log
     timezone: '+08:00',
     define: {
         paranoid: true,

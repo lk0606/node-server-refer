@@ -30,8 +30,6 @@ yarn-error.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-lib/
-
 # Created by https://www.gitignore.io/api/sublimetext,webstorm
 
 ### SublimeText ###

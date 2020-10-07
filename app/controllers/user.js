@@ -1,6 +1,10 @@
 import jsonwebtoken from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import User from '../models/user'
+import UserService from '../services/user'
+const {
+    register,
+} = UserService
 
 class UserController {
     static async register(ctx, next) {
@@ -10,38 +14,24 @@ class UserController {
             ctx.status = 400
             ctx.body = {
                 success: false,
-                errorMsg: `expected an object with username, password, email but got: ${body}`
+                errorMsg: `expected an object with username, password, email but got: ${JSON.stringify(body)}`
             }
             return
         }
-        let user = await User.findOne({
-            where: {
-                username
+        
+        try {
+            const user = await register(body)
+            console.log('ctx :>> ', ctx);
+            ctx.body = {
+                code: ctx.status,
+                data: {
+                    ...user
+                }
             }
-        })
-        console.log('user :>> ', user);
-        let result = user
-        if(!user) {
-            try {
-                password = await bcrypt.hash(password, 10)
-                result = await User.create({
-                    username,
-                    password
-                })
-                console.log('user :>> ', password)
-            } catch(e) {
-                console.log('e :>> ', e);
-            }
-        } else {
-            var isReg = await bcrypt.compare(password, user.password)
+        } catch (error) {
+            
         }
-        ctx.status = 200
-        const { username: name, password: pwd } = result
-        ctx.body = {
-            name,
-            pwd,
-            isReg,
-        }
+        
         await next()
     }
 }
