@@ -1,8 +1,8 @@
 import Router from 'koa-router'
-import CommonController from '../../controllers/common'
+import CommonController from '../controllers/common'
 
 const router = new Router({
-    prefix: '/v1/common'
+    prefix: '/common'
 })
 router.get('/getCaptcha', CommonController.getCaptcha)
 router.post('/sendEmail', CommonController.sendEmail)
