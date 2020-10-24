@@ -4,7 +4,9 @@ class CommonService {
     static getCaptcha() {
         const captcha = svgCaptcha.create({
             color: true,
-            noise: Math.floor(Math.random() * 3),
+            ignoreChars: 'l1io0',
+            noise: 0, // 线条
+            // noise: Math.floor(Math.random() * 3), // 线条
             width: 85,
             height: 36,
             fontSize: 36,

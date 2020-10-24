@@ -40,20 +40,29 @@ class UserController {
 
     static async getUserInfo(ctx, next) {
         const body = get(ctx, 'request.body', {})
-        const { username } = body
+        const { username = '' } = body
         let success = false
+        let message = ''
         try {
             const data = await getUserInfo(body)
             let success = true
+            if (data) {
+                message = `${username}，欢迎您`
+            } else {
+                success = false
+                message = `未找到用户${username}`
+            }
             ctx.body = {
                 success,
-                message: `${username}，欢迎您`,
+                message,
                 data,
             }
         } catch (error) {
+            console.log('getUserInfo error :>> ', error);
+            const { message: errorMsg } = error
             ctx.body = {
                 success,
-                message: `未找到用户${username}`,
+                message: errorMsg,
             }
         }
         await next()

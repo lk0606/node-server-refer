@@ -6,8 +6,9 @@ class CommonController {
     static async getCaptcha(ctx, next) {
         const captcha = CommonService.getCaptcha()
         ctx.body = {
+            success: true,
             data: {
-                ...captcha
+                ...captcha,
             }
         }
         await next()
