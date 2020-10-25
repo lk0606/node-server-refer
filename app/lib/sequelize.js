@@ -25,7 +25,8 @@ const sequelize = new Sequelize(dbName, user, password, {
 })
 
 sequelize.sync({
-    alter: true,
+    alter: true, // Alters tables to fit models
+    force: false, // true, each Model will run DROP TABLE IF EXISTS, before create
 })
 
 export default sequelize
