@@ -1,24 +1,25 @@
 
-let tpl = {
-    success: true,
-    data: {},
-    code: 200,
-    message: '',
-    requestUrl: '',
-    requestTime: '',
-}
 
-const catchError = async (ctx, next)=> {
+export const errorHander = async (ctx, next)=> {
+    let tpl = {
+        success: true,
+        data: null,
+        code: 200,
+        message: '',
+        requestUrl: ctx.request.url,
+        requestTime: +new Date(),
+    }
+
     try {
         await next()
     } catch (error) {
+        console.log('errorHander :>> ', error);
         const { message = '服务器异常' } = error
         tpl = {
             ...tpl,
             message,
+            success: false,
         }
         ctx.body = tpl
     }
 }
-
-export default catchError
