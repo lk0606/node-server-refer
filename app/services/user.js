@@ -1,4 +1,3 @@
-import jsonwebtoken from 'jsonwebtoken'
 import { v4 as uuid } from 'uuid'
 import bcrypt from 'bcryptjs'
 import User from '../models/user'

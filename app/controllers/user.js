@@ -1,3 +1,4 @@
+import jsonwebtoken from 'jsonwebtoken'
 import UserService from '../services/user'
 import { get } from '@wont/utils'
 import { getValue } from '../lib/redis'
@@ -51,30 +52,50 @@ class UserController {
         await next()
     }
 
+    static genToken(data) {
+        const token = jsonwebtoken.sign(
+            {
+                data,
+                // exp: +new Date() + 24*60*60*1000,
+            },
+            'secret',
+            {
+                expiresIn: '1d', // 等同exp
+            }
+        )
+        return token
+    }
+
     static async getUserInfo(ctx, next) {
         const body = get(ctx, 'request.body', {})
         const { username = '' } = body
-        let success = false
-        let message = ''
         try {
-            const data = await getUserInfo(body)
-            let success = true
-            if (data) {
-                message = `登陆成功：${username}，欢迎您`
+            const { dataValues } = await getUserInfo(body) || {}
+            if (dataValues) {
+                const { username, password, email } = dataValues
+                const payload = {
+                    username,
+                    password,
+                    email,
+                }
+                const token = UserController.genToken(payload)
+                ctx.set('token', token)
+                ctx.body = {
+                    success: true,
+                    message: `登陆成功：${username}，欢迎您`,
+                    data: dataValues,
+                }
             } else {
-                success = false
-                message = `登录失败：用户${username}不存在，或用户密码不匹配`
-            }
-            ctx.body = {
-                success,
-                message,
-                data,
+                ctx.body = {
+                    success: false,
+                    message: `登录失败：用户${username}不存在，或用户密码不匹配`,
+                }
             }
         } catch (error) {
             console.log('getUserInfo error :>> ', error);
             const { message: errorMsg } = error
             ctx.body = {
-                success,
+                success: false,
                 message: errorMsg,
             }
         }
