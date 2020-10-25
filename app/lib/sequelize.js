@@ -25,7 +25,7 @@ const sequelize = new Sequelize(dbName, user, password, {
 })
 
 sequelize.sync({
-    alter: true
+    alter: true,
 })
 
 export default sequelize
