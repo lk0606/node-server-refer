@@ -79,7 +79,10 @@ class UserController {
                     email,
                 }
                 const token = UserController.genToken(payload)
-                ctx.set('token', token)
+                ctx.cookies.set('token', token, {
+                    // domain: 'localhost',
+                    httpOnly: false,
+                })
                 ctx.body = {
                     success: true,
                     message: `登陆成功：${username}，欢迎您`,

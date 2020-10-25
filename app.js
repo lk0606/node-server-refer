@@ -12,7 +12,9 @@ const app = new Koa()
 
 const middleware = compose([
     bodyParser(),
-    cors(),
+    cors({
+        credentials: true,
+    }),
     helmet(),
     koajwt,
     errorHander,
