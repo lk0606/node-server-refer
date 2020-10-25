@@ -1,3 +1,4 @@
+import { setValue } from '../lib/redis'
 import svgCaptcha from 'svg-captcha'
 
 class CommonService {
@@ -11,6 +12,8 @@ class CommonService {
             height: 36,
             fontSize: 36,
         })
+        const litmit = 24 * 60 * 60 * 60
+        setValue('captcha', captcha.text, litmit)
         return captcha
     }
 }

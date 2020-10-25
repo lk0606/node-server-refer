@@ -1,5 +1,6 @@
 import UserService from '../services/user'
 import { get } from '@wont/utils'
+import { getValue } from '../lib/redis'
 const {
     register,
     getUserInfo,
@@ -8,8 +9,9 @@ const {
 class UserController {
     static async register(ctx, next) {
         const { body = {} } = ctx.request || {}
-        let { username = '', password= '' } = body
+        let { username = '', password = '', email = '', captcha = '' } = body
         let success = false
+        let message = ''
         if(!username || !password) {
             ctx.status = 400
             ctx.body = {
@@ -20,7 +22,17 @@ class UserController {
         }
 
         try {
+            const authCode = await getValue(email)
+            if(authCode !== captcha) {
+                ctx.body = {
+                    success: false,
+                    message: `验证码错误`,
+                }
+                return
+            }
+
             const user = await register(body)
+            console.log('user :>> ', user);
             success = true
             ctx.body = {
                 success,
@@ -29,9 +41,10 @@ class UserController {
             }
         } catch (error) {
             success = false
+            message = get(error, 'message', '')
             ctx.body = {
                 success,
-                message: '系统异常',
+                message,
             }
         }
 
@@ -47,10 +60,10 @@ class UserController {
             const data = await getUserInfo(body)
             let success = true
             if (data) {
-                message = `${username}，欢迎您`
+                message = `登陆成功：${username}，欢迎您`
             } else {
                 success = false
-                message = `未找到用户${username}`
+                message = `登录失败：用户${username}不存在，或用户密码不匹配`
             }
             ctx.body = {
                 success,

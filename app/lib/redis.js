@@ -21,8 +21,14 @@ const getHValue = (key) => {
     return getAsync(key)
 }
 
-const setValue = (key, value) => {
-    if(value !== 0 && !value) {
+/**
+ *
+ * @param {*} key
+ * @param {*} value
+ * @param {number} timestamp 缓存时间 单位 s
+ */
+const setValue = (key, value, timestamp) => {
+    if([undefined, null, '', NaN].includes(value)) {
         return
     }
     if(typeof value === 'object') {
@@ -30,7 +36,11 @@ const setValue = (key, value) => {
             client.hset(key, item, value[item], redis.print)
         })
     } else if (typeof value === 'string') {
-        client.set(key, value)
+        if (timestamp && typeof timestamp === 'number') {
+            client.set(key, value, 'EX', timestamp)
+        } else {
+            client.set(key, value)
+        }
     }
 }
 

@@ -1,32 +1,26 @@
-import { Model, DataTypes } from 'sequelize'
+import { Model, DataTypes, UUIDV4 } from 'sequelize'
 import sequelize from '../lib/sequelize'
 
 class User extends Model {}
 
 User.init({
-    uid: {
-        type: DataTypes.INTEGER,
+    uuid: {
+        type: DataTypes.UUID,
         primaryKey: true,
-        autoIncrement: true,
     },
-    username: DataTypes.STRING,
-    // email: {
-    //     type: DataTypes.STRING(128),
-    //     unique: true,
-    // },
-    password: DataTypes.STRING,
-    // createdTime: {
-    //     type: DataTypes.DATE,
-    //     field: "created_time"
-    // },
-    // updatedTime: {
-    //     type: DataTypes.DATE,
-    //     field: "updated_time"
-    // },
-    // deletedTime: {
-    //     type: DataTypes.DATE,
-    //     field: "deleted_time"
-    // },
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    email: {
+        type: DataTypes.STRING(128),
+        allowNull: false,
+        unique: true,
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
 }, {
     sequelize,
     tableName: 'user',

@@ -6,5 +6,6 @@ const router = new Router({
 })
 router.get('/getCaptcha', CommonController.getCaptcha)
 router.post('/sendEmail', CommonController.sendEmail)
+router.post('/getCaptchaByEmail', CommonController.sendEmail)
 
 module.exports = router
