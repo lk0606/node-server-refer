@@ -33,14 +33,22 @@ class UserController {
             }
 
             const user = await register(body)
-            console.log('user :>> ', user);
-            success = true
-            ctx.body = {
-                success,
-                message: `注册成功`,
-                data: user
+            console.log('register user :>> ', user);
+            if(user) {
+                ctx.body = {
+                    success: true,
+                    message: `注册成功`,
+                    data: user
+                }
+            } else {
+                ctx.body = {
+                    success: false,
+                    message: `数据异常`,
+                }
             }
+
         } catch (error) {
+            console.log('UserController register error :>> ', error);
             success = false
             message = get(error, 'message', '')
             ctx.body = {
@@ -68,11 +76,10 @@ class UserController {
 
     static async getUserInfo(ctx, next) {
         const body = get(ctx, 'request.body', {})
-        const { username = '' } = body
+        const { username = '', password, email } = body
         try {
             const { dataValues } = await getUserInfo(body) || {}
             if (dataValues) {
-                const { username, password, email } = dataValues
                 const payload = {
                     username,
                     password,

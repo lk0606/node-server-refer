@@ -1,8 +1,6 @@
 import { v4 as uuid } from 'uuid'
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcrypt'
 import User from '../models/user'
-import { get } from '@wont/utils'
-import { getValue } from '../lib/redis'
 
 class UserService {
     /**
@@ -20,7 +18,8 @@ class UserService {
             }) || {}
             return dataValues
         } catch (error) {
-            console.log('error :>> ', error);
+            console.log('UserService create error :>> ', error);
+            throw error
         }
     }
 
@@ -30,30 +29,52 @@ class UserService {
             const user = await User.findOne({
                 where: {
                     username,
-                    password,
                 }
             })
-            return user
+            if(!user) {
+                return
+            }
+            const { password: hash = '' } = user || {}
+            const isPass = bcrypt.compareSync(password, hash)
+            if (isPass) {
+                return user
+            } else {
+                return {
+                    success: false,
+                    message: `登录失败：密码错误`,
+                }
+            }
         } catch (error) {
-            console.log('error :>> ', error);
+            console.log('service getUserInfo error :>> ', error);
         }
     }
 
-    static async register(data) {
-        const { username } = data
+    static async register(data={}) {
+        const {
+            username = '',
+            password = '',
+            email = '',
+         } = data
         try {
             const user = await UserService.getUserInfo(data)
             if(user) {
                 const result = {
                     success: false,
-                    message: `注册失败：用户名${username}已存在`,
+                    message: `注册失败：邮箱${email}已被注册`,
                 }
                 return Promise.reject(result)
             }
-            const newUser = await UserService.create(data)
+            const hash = bcrypt.hashSync(password, 10)
+            const params = {
+                username,
+                password: hash,
+                email,
+            }
+            const newUser = await UserService.create(params)
             return newUser
         } catch (error) {
-            console.log('error :>> ', error);
+            console.log('UserService register error :>> ', error);
+            throw error
         }
 
     }

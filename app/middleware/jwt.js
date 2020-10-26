@@ -6,6 +6,6 @@ export const koajwt = koaJwt({
     .unless({
         path: [
             /^\/user/,
-            // /^\/common/,
+            /^\/common/,
         ]
     })
