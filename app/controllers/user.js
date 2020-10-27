@@ -24,6 +24,13 @@ class UserController {
 
         try {
             const authCode = await getValue(email)
+            if (!authCode) {
+                ctx.body = {
+                    success: false,
+                    message: `验证码过期`,
+                }
+                return
+            }
             if(authCode !== captcha) {
                 ctx.body = {
                     success: false,

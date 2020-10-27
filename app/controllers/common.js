@@ -1,7 +1,7 @@
 import CommonService from '../services/common'
 import sendEmail from '../config/nodemailer'
 import { setValue, getValue } from '../lib/redis'
-import { get } from '@wont/utils'
+import { get, formatTime } from '@wont/utils'
 
 
 class CommonController {
@@ -29,12 +29,13 @@ class CommonController {
                 return
             }
 
-            const limit = 24 * 60 * 60 * 1000
-            const expire = +new Date() + limit
+            const min = 24 * 60 * 60
+            const sec = min * 1000
+            const expire = +new Date() + sec
             const params = {
                 username,
                 email,
-                expire,
+                expire: formatTime(expire, 'yyyy-MM-dd hh:mm:ss'),
                 expireText: '1天',
                 captcha: '0000',
             }
@@ -49,7 +50,7 @@ class CommonController {
                         captcha: params.captcha,
                     },
                 }
-                setValue(params.email, params.captcha, 24 * 60 * 60)
+                setValue(params.email, params.captcha, min)
             } else {
                 ctx.body = {
                     success: false,
