@@ -1,4 +1,4 @@
-import { client, getValue, getHValue, setValue } from './app/lib/redis'
+import { client, getValue, getHValue, setValue } from '../app/lib/redis'
 
 getValue('alias').then(res=> {
     console.log('res :>> ', res);
