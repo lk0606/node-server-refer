@@ -1,3 +1,5 @@
+import { formatTime } from '@wont/utils'
+
 export const errorHander = async (ctx, next)=> {
     let tpl = {
         success: true,
@@ -5,21 +7,25 @@ export const errorHander = async (ctx, next)=> {
         // code: 200,
         message: '',
         requestUrl: ctx.href,
-        requestTime: +new Date(),
+        requestTime: formatTime(Date.now(), 'yyyy-MM-dd h:m:s'),
     }
 
     return next().catch(err => {
         if (err.status === 401) {
-
+            tpl = {
+                ...tpl,
+                success: false,
+                message: '鉴权失败，请先登录',
+            }
         } else {
-            console.log('errorHander :>> ', err);
-            const { message = '服务器异常' } = err
+            const { message = '服务器异常', stack } = err
             tpl = {
                 ...tpl,
                 message,
                 success: false,
             }
             ctx.body = tpl
+            console.log('errorHander :>> ', stack);
         }
     })
 }

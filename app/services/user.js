@@ -18,7 +18,6 @@ class UserService {
             }) || {}
             return dataValues
         } catch (error) {
-            console.log('UserService create error :>> ', error);
             throw error
         }
     }
@@ -73,7 +72,6 @@ class UserService {
             const newUser = await UserService.create(params)
             return newUser
         } catch (error) {
-            console.log('UserService register error :>> ', error);
             throw error
         }
 

@@ -4,7 +4,7 @@ import cors from '@koa/cors'
 import compose from 'koa-compose'
 import helmet from 'koa-helmet'
 import InitManager from './app/core/init'
-import { errorHander } from'./app/middleware/exception'
+import { errorHander } from'./app/middleware/errorHander'
 import { koajwt } from './app/middleware/jwt'
 
 const port = 3000

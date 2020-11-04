@@ -3,7 +3,6 @@ import sendEmail from '../config/nodemailer'
 import { setValue, getValue } from '../lib/redis'
 import { get, formatTime } from '@wont/utils'
 
-
 class CommonController {
     static async getCaptcha(ctx, next) {
         const captcha = CommonService.getCaptcha()
