@@ -54,8 +54,8 @@ pipeline {
             steps {
                 script {
                     echo "current branch: $BRANCH_NAME"
-                    sh "cd $target_dir/$project_name/$branch_name"
                     sh "pwd"
+                    sh "cd $target_dir/$project_name/$branch_name/"
                     sh 'npm run dev'
                 }
             }
