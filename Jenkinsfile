@@ -22,14 +22,6 @@ pipeline {
                 sh 'npm i'
             }
         }
-        stage('server') {
-            steps {
-                script {
-                    echo "current branch: $BRANCH_NAME"
-                    sh 'npm run dev'
-                }
-            }
-        }
         stage('Deploy') {
             steps {
                 script {
@@ -55,6 +47,16 @@ pipeline {
                             ]
                         )
                     }
+                }
+            }
+        }
+        stage('server') {
+            steps {
+                script {
+                    echo "current branch: $BRANCH_NAME"
+                    sh "cd $target_dir/$project_name/$branch_name"
+                    sh "pwd"
+                    sh 'npm run dev'
                 }
             }
         }
