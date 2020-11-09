@@ -28,7 +28,7 @@ pipeline {
                     echo "current branch: $BRANCH_NAME"
                     echo "BUILD_NUMBER: $BUILD_NUMBER"
                     echo "project_name: ${project_name}"
-                    if (BRANCH_NAME.equals("dev") || BRANCH_NAME.equals("master")) {
+                    if (BRANCH_NAME.equals("dev") || BRANCH_NAME.equals("test") || BRANCH_NAME.equals("master")) {
                         sshPublisher(
                             continueOnError: false, failOnError: true,
                             publishers: [
