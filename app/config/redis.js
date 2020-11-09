@@ -18,7 +18,8 @@ const retry_strategy = (options) => {
 }
 
 const redisConfig = {
-    host: 'localhost',
+    host: 'wont-org.cn',
+    // host: 'localhost',
     port: 6379,
     password: '123456',
     detect_buffers: true,

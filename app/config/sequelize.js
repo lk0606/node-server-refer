@@ -1,7 +1,7 @@
 const dbConfig = {
     db: {
         dbName: 'demo',
-        host: 'localhost',
+        host: 'wont-org.cn',
         port: 3306,
         user: 'root',
         password: '5456'
