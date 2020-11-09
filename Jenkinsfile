@@ -1,10 +1,10 @@
 pipeline {
     agent any
-    options {
-        disableConcurrentBuilds()
-        timeout(time: 10, unit: 'MINUTES')
-        timestamps()
-    }
+    // options {
+    //     disableConcurrentBuilds()
+    //     timeout(time: 10, unit: 'MINUTES')
+    //     timestamps()
+    // }
     tools { nodejs 'NodeJs_14_lts' }
     environment {
         project_name = 'node-server-refer'
