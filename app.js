@@ -7,7 +7,7 @@ import InitManager from './app/core/init'
 import { errorHander } from'./app/middleware/errorHander'
 import { koajwt } from './app/middleware/jwt'
 
-const port = 3000
+const port = 13000
 const app = new Koa()
 
 const middleware = compose([
