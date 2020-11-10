@@ -3,15 +3,17 @@ import bodyParser from 'koa-bodyparser'
 import cors from '@koa/cors'
 import compose from 'koa-compose'
 import helmet from 'koa-helmet'
-import InitManager from './app/core/init'
 import { errorHander } from'./app/middleware/errorHander'
 import { koajwt } from './app/middleware/jwt'
+import routers from './app/routers'
 
+const routes = Object.values(routers).map(item=> item.routes())
 const port = 13000
 const host = '0.0.0.0'
 const app = new Koa()
 
 const middleware = compose([
+    ...routes,
     bodyParser(),
     cors({
         credentials: true,
@@ -22,8 +24,6 @@ const middleware = compose([
 ])
 
 app.use(middleware)
-
-InitManager.initCore(app)
-app.listen(port, host, ()=> {
+app.listen(port, ()=> {
     console.log(`app is running on ${port}`)
 })

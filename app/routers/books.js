@@ -1,4 +1,4 @@
-import Router from 'koa-router'
+import Router from '@koa/router'
 
 const router = new Router({
     prefix: '/book'
@@ -24,4 +24,4 @@ router.post('/:id/like', async (ctx, next) => {
     }
 })
 
-module.exports = router
+export default router

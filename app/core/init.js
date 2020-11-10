@@ -7,7 +7,7 @@ class InitManger {
         InitManger.initRouters()
     }
     static initRouters() {
-        const rootDir = `${process.cwd()}/app/api`
+        const rootDir = `${process.cwd()}/app/routers`
         const routes = requireDirectory(module, rootDir, {
             visit: isKoaRouter
         })

@@ -1,4 +1,4 @@
-import Router from 'koa-router'
+import Router from '@koa/router'
 import CommonController from '../controllers/common'
 
 const router = new Router({
@@ -8,4 +8,4 @@ router.get('/getCaptcha', CommonController.getCaptcha)
 router.post('/sendEmail', CommonController.sendEmail)
 router.post('/getCaptchaByEmail', CommonController.sendEmail)
 
-module.exports = router
+export default router
