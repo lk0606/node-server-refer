@@ -11,7 +11,7 @@ pipeline {
             steps {
                 sh 'node -v'
                 sh 'npm -v'
-                // sh 'npm config set registry https://registry.npm.taobao.org/'
+                sh 'npm config set registry https://registry.npm.taobao.org/'
                 // sh 'npm config get registry'
                 sh 'npm i'
                 sh 'npm i bcrypt --nodedir'
