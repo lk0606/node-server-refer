@@ -26,6 +26,7 @@ pipeline {
         stage('Server') {
             steps {
                 script {
+                    sh 'npm run stop'
                     sh 'npm run prod'
                 }
             }
