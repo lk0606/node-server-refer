@@ -15,7 +15,7 @@ const webpackconfig = {
     extensions: ['.js', '.json'],
   },
   output: {
-    filename: '[name]_[contenthash:8].js',
+    filename: '[name].bundle.js',
     path: join(__dirname, '../dist'),
   },
   module: {
@@ -31,7 +31,7 @@ const webpackconfig = {
   },
   externals: [nodeExternals()],
   plugins: [
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
   ],
   node: {
     global: true,
