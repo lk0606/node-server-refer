@@ -5,10 +5,10 @@
   "main": "app.js",
   "scripts": {
     "list": "pm2 list",
-    "prod": "rm -rf dist && pm2 start dist/app.bundle.js",
+    "prod": "pm2 start dist/app.bundle.js",
     "stop": "pm2 stop dist/app.bundle.js",
     "dev": "nodemon --exec babel-node app.js",
-    "build": "webpack -c webpack/webpack.config.prod.js",
+    "build": "rm -rf dist && webpack -c webpack/webpack.config.prod.js",
     "debug": "nodemon --inspect --exec babel-node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
