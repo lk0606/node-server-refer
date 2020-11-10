@@ -25,5 +25,5 @@ const middleware = compose([
 
 app.use(middleware)
 app.listen(port, host, () => {
-    console.log(`app is running on ${port}`)
+    console.log(`app is running on http://${host}:${port}`)
 })
