@@ -15,7 +15,7 @@ const webpackconfig = {
     extensions: ['.js', '.json'],
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name]_[contenthash:8].js',
     path: join(__dirname, '../dist'),
   },
   module: {
