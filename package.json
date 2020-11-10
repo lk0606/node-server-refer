@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "list": "pm2 list",
-    "prod": "pm2 start dist/app_*.js.js",
-    "stop": "pm2 stop dist/app_*.js.js",
+    "prod": "pm2 start dist/app_*.js",
+    "stop": "pm2 stop dist/app_*.js",
     "dev": "nodemon --exec babel-node app.js",
     "build": "webpack -c webpack/webpack.config.prod.js",
     "debug": "nodemon --inspect --exec babel-node app.js",
