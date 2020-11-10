@@ -13,7 +13,6 @@ const host = '0.0.0.0'
 const app = new Koa()
 
 const middleware = compose([
-    ...routes,
     bodyParser(),
     cors({
         credentials: true,
@@ -21,6 +20,7 @@ const middleware = compose([
     helmet(),
     koajwt,
     errorHander,
+    ...routes,
 ])
 
 app.use(middleware)
