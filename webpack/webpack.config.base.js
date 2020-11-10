@@ -25,7 +25,7 @@ const webpackconfig = {
         use: {
           loader: 'babel-loader',
         },
-        exclude: [join(__dirname, '..//node_modules')],
+        exclude: [join(__dirname, '../node_modules')],
       },
     ],
   },

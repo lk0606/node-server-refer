@@ -26,4 +26,4 @@ User.init({
     tableName: 'user',
 })
 
-module.exports = User
+export default User
