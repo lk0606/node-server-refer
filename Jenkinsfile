@@ -7,11 +7,6 @@ pipeline {
     }
     tools { nodejs 'NodeJs_14_lts' }
     stages {
-        stage('Preview') {
-            steps {
-                    sh 'npm run list'
-            }
-        }
         stage('Preparation') {
             steps {
                 sh 'node -v'
@@ -19,6 +14,7 @@ pipeline {
                 // sh 'npm config set registry https://registry.npm.taobao.org/'
                 // sh 'npm config get registry'
                 sh 'npm i'
+                sh 'npm run list'
             }
         }
         stage('Build') {
