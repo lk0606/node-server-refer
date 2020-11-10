@@ -26,8 +26,11 @@ pipeline {
         stage('Server') {
             steps {
                 script {
-                    sh 'npm run stop'
+                    sh 'pwd'
+                    sh 'npm run list'
+                    // sh 'npm run stop'
                     sh 'npm run prod'
+                    sh 'npm run list'
                 }
             }
         }
