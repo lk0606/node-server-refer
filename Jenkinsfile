@@ -14,7 +14,7 @@ pipeline {
                 // sh 'npm config set registry https://registry.npm.taobao.org/'
                 // sh 'npm config get registry'
                 sh 'npm i'
-                sh 'npm run list'
+                sh 'npm i bcrypt --nodedir'
             }
         }
         stage('Build') {
