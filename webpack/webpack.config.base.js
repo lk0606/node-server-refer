@@ -8,7 +8,7 @@ const webpackconfig = {
   target: 'node',
   mode: 'none',
   entry: {
-    app: join(__dirname, '../app.js'),
+    app: join(__dirname, '../app/index.js'),
   },
   resolve: {
     modules: [join(__dirname, '../app'), 'node_modules'],

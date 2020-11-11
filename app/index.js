@@ -3,9 +3,9 @@ import bodyParser from 'koa-bodyparser'
 import cors from '@koa/cors'
 import compose from 'koa-compose'
 import helmet from 'koa-helmet'
-import { errorHander } from'./app/middleware/errorHander'
-import { koajwt } from './app/middleware/jwt'
-import routers from './app/routers'
+import { formatBody } from'./middleware/formatBody'
+import { koajwt } from './middleware/jwt'
+import routers from './routers'
 
 const routes = Object.values(routers).map(item=> item.routes())
 const port = 13000
@@ -19,7 +19,7 @@ const middleware = compose([
     }),
     helmet(),
     koajwt,
-    errorHander,
+    formatBody,
     ...routes,
 ])
 

@@ -83,6 +83,7 @@ class UserController {
 
     static async getUserInfo(ctx, next) {
         const body = get(ctx, 'request.body', {})
+        const [ domain = '' ] = get(ctx, 'request.header.host', '').split(':')
         const { username = '', password, email } = body
         try {
             const { dataValues } = await getUserInfo(body) || {}
@@ -94,7 +95,7 @@ class UserController {
                 }
                 const token = UserController.genToken(payload)
                 ctx.cookies.set('token', token, {
-                    // domain: 'localhost',
+                    domain,
                     httpOnly: false,
                 })
                 ctx.body = {

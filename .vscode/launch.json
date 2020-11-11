@@ -1,5 +1,5 @@
 {
-    // 使用 IntelliSense 了解相关属性。 
+    // 使用 IntelliSense 了解相关属性。
     // 悬停以查看现有属性的描述。
     // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
@@ -10,7 +10,7 @@
             "name": "nodemon",
             "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/nodemon",
             "runtimeArgs":["--exec", "babel-node"],
-            "program": "${workspaceFolder}/app.js",
+            "program": "${workspaceFolder}/app/index.js",
             "restart": true,
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
@@ -44,7 +44,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/app.js"
+            "program": "${workspaceFolder}/app/index.js"
         }
     ]
 }
