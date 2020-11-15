@@ -28,7 +28,6 @@ pipeline {
             steps {
                 script {
                     sh 'pwd'
-                    sh 'npm run list'
                     // sh 'npm run stop'
                     sh 'npm run prod'
                     sh 'npm run list'
