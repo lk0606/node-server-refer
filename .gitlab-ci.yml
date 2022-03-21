@@ -1,0 +1,26 @@
+image: node:12.22.6
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - Preparation
+  - Build
+  - Deploy
+
+Preparation-job:
+  stage: Preparation
+  script:
+  - npm i
+
+Build-job:
+  stage: Build
+  script:
+  - npm run build
+
+Deploy-job:
+  stage: Deploy
+  script:
+  - npm run stop
+  - npm run start
