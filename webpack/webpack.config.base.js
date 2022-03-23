@@ -4,6 +4,8 @@ const nodeExternals = require('webpack-node-externals')
 // import { join } from 'path'
 // import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 
+const output = join(__dirname, '../dist')
+console.log('output :>> ', output);
 const webpackconfig = {
   target: 'node',
   mode: 'none',

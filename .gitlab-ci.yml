@@ -6,7 +6,7 @@ cache:
 
 stages:
   # - Preparation
-  # - Build
+  - Build
   - Deploy
 
 # Preparation-job:
@@ -14,10 +14,10 @@ stages:
 #   script:
 #   - npm i
 
-# Build-job:
-#   stage: Build
-#   script:
-#   - npm run build
+Build-job:
+  stage: Build
+  script:
+  - npm run build
 
 Deploy-job:
   stage: Deploy
