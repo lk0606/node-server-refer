@@ -24,4 +24,4 @@ Deploy-job:
   script:
   - npm run list
   # - npm run stop
-  - npm run start
+  - npm run prod
