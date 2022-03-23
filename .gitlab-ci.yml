@@ -7,7 +7,7 @@ cache:
 stages:
   # - Preparation
   - Build
-  - Deploy
+  # - Deploy
 
 # Preparation-job:
 #   stage: Preparation
@@ -18,11 +18,15 @@ Build-job:
   stage: Build
   script:
   - npm run build
-
-Deploy-job:
-  stage: Deploy
-  script:
   - pwd
   - ls -a
+  - cd app
+  - ls -a
+
+# Deploy-job:
+#   stage: Deploy
+#   script:
+#   - pwd
+#   - ls -a
   # - npm run stop
   # - npm run start
