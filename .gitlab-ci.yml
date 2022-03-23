@@ -5,28 +5,22 @@ cache:
     - node_modules/
 
 stages:
-  # - Preparation
+  - Preparation
   - Build
-  # - Deploy
+  - Deploy
 
-# Preparation-job:
-#   stage: Preparation
-#   script:
-#   - npm i
+Preparation-job:
+  stage: Preparation
+  script:
+  - npm i
 
 Build-job:
   stage: Build
   script:
   - npm run build
-  - pwd
-  - ls -a
-  - cd app
-  - ls -a
 
-# Deploy-job:
-#   stage: Deploy
-#   script:
-#   - pwd
-#   - ls -a
-  # - npm run stop
-  # - npm run start
+Deploy-job:
+  stage: Deploy
+  script:
+  - npm run stop
+  - npm run start
