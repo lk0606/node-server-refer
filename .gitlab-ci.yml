@@ -22,5 +22,6 @@ Build-job:
 Deploy-job:
   stage: Deploy
   script:
+  - npm run list
   - npm run stop
   - npm run start
