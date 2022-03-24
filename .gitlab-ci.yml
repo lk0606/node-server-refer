@@ -22,6 +22,7 @@ stages:
 Deploy:
   stage: Deploy
   script:
-  # - npm run stop
-  # - npm run start
   - sh deploy.sh ${USER} ${IP} ${PASSWORD}
+  # - npm run list
+  # - npm run stop
+  # - npm run prod
