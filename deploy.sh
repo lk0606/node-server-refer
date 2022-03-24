@@ -3,6 +3,8 @@ ip=$1
 host=$2
 password=$3
 
+pwd
+ls -a
 
 if [ -d "./dist" ]; then
     pwd

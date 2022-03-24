@@ -18,10 +18,12 @@ Build:
   stage: Build
   script:
   - npm run build
+  - ls -a
 
 Deploy:
   stage: Deploy
   script:
+  - ls -a
   - sh deploy.sh ${USER} ${IP} ${PASSWORD}
   # - npm run list
   # - npm run stop
