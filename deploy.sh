@@ -1,6 +1,7 @@
+#!/usr/bin/expect
 
-ip=$1
-host=$2
+user=$1
+ip=$2
 password=$3
 
 pwd
@@ -9,10 +10,14 @@ ls -a
 if [ -d "./dist" ]; then
     pwd
     ls -a
-    set user root
-    set ip 49.234.7.238
-    set password lk452123+
-    scp -r ./dist /server_root/node_server_refer
+    set user ${user}
+    set ip ${ip}
+    set password ${password}
+    set timeout 1200
+    spawn scp -r ./dist ${user}@${ip}:/server_root/node_server_refer
+    expect "password"
+    send "${password}\r"
+    interact
     fi
 
 
