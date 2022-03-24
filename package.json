@@ -8,7 +8,7 @@
     "prod": "pm2 start dist/app.bundle.js",
     "stop": "pm2 stop dist/app.bundle.js",
     "dev": "nodemon --exec babel-node app/index.js",
-    "build": "rm -rf dist && webpack -c webpack/webpack.config.prod.js",
+    "build": "webpack -c webpack/webpack.config.prod.js",
     "debug": "nodemon --inspect --exec babel-node app/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

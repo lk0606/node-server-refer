@@ -6,7 +6,7 @@ image: node:12.22.6
 
 stages:
   # - Preparation
-  # - Build
+  - Build
   - Deploy
 
 # Preparation:
@@ -14,10 +14,10 @@ stages:
 #   script:
 #   - npm i
 
-# Build:
-#   stage: Build
-#   script:
-#   - npm run build
+Build:
+  stage: Build
+  script:
+  - npm run build
 
 Deploy:
   stage: Deploy
