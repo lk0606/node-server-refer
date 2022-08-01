@@ -14,6 +14,7 @@ client.on('error', (err) => {
 
 const getValue = (key) => {
     const getAsync = promisify(client.get).bind(client)
+    console.log('getAsync :>> ', getAsync);
     return getAsync(key)
 }
 const getHValue = (key) => {
@@ -28,6 +29,7 @@ const getHValue = (key) => {
  * @param {number} timestamp 缓存时间 单位 s
  */
 const setValue = (key, value, timestamp) => {
+    console.log('typeof value :>> ', typeof value, value);
     if([undefined, null, '', NaN].includes(value)) {
         return
     }
@@ -35,7 +37,7 @@ const setValue = (key, value, timestamp) => {
         Object.keys(value).forEach(item=> {
             client.hset(key, item, value[item], redis.print)
         })
-    } else if (typeof value === 'string') {
+    } else if (['string', 'number'].includes(typeof value)) {
         if (timestamp && typeof timestamp === 'number') {
             client.set(key, value, 'EX', timestamp)
         } else {
